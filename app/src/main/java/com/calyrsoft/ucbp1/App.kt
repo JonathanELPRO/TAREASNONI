@@ -26,3 +26,4 @@ class App : Application(){
 //aqui esta la configuracion de Koin pues es lo primero que debe suceder antes de ver cualquier pantalla, luego
 //recien se realizan otras actividades en este caso solo tenemos una que se llama MainActivity que se encarga
 //de mostrar el GithubScreen
+//prueba push

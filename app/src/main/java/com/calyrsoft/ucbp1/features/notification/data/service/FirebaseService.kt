@@ -55,7 +55,7 @@ class FirebaseService : FirebaseMessagingService() {
 
         // 👇 Intent a MainActivity con ruta "github_screen"
         val intent = Intent(this, MainActivity::class.java).apply {
-            putExtra("navigateTo", "register") // ejemplo: "github_screen"
+            putExtra("navigateTo", "github") // ejemplo: "github_screen"
             flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
         }
         //Crea un Intent que abrirá MainActivity.

@@ -57,7 +57,7 @@ fun SplashScreen(onTimeout: () -> Unit) {
     ) {
         Column(horizontalAlignment = Alignment.CenterHorizontally) {
             Image(
-                painter = rememberAsyncImagePainter("https://upload.wikimedia.org/wikipedia/commons/3/3e/Android_logo_2019.svg"),
+                painter = rememberAsyncImagePainter("https://cdn-icons-png.freepik.com/512/6356/6356630.png"),
                 contentDescription = "Logo App",
                 modifier = Modifier
                     .size(140.dp)

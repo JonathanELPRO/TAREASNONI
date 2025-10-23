@@ -36,7 +36,10 @@ import androidx.compose.material3.rememberDrawerState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.runtime.setValue
 import androidx.compose.runtime.snapshotFlow
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -50,6 +53,7 @@ import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import com.calyrsoft.ucbp1.features.profile.presentation.MaintenanceBanner
 import com.calyrsoft.ucbp1.features.remoteconfig.data.manager.RemoteConfigManager
+import com.calyrsoft.ucbp1.features.splashScreen.SplashScreen
 import com.calyrsoft.ucbp1.navigation.AppNavigation
 import com.calyrsoft.ucbp1.navigation.NavigationDrawer
 import com.calyrsoft.ucbp1.navigation.NavigationViewModel
@@ -266,37 +270,44 @@ class MainActivity : ComponentActivity() {
 
 
         setContent {
-            LaunchedEffect(key1 = Unit) {
-                //Log.d(tag = "MainActivity", msg = "onCreate - Procesando intent inicial")
-                navigationViewModel.handleDeepLink(currentIntent)
-            }
-            //lo de arriba se ejecuta una sola vez con ayuda de LaunchedEffect
-            //el deeplink dice:
-            //Pídele al ViewModel de navegación que revise el intent con el que se abrió la app
-            //y decida a qué pantalla debe ir
+            var showSplash by remember { mutableStateOf(true) }
 
-            LaunchedEffect(key1 = Unit) {
-                snapshotFlow { currentIntent }
-                    //Crea un “flujo” (Flow) que observa la variable currentIntent.
-                    .distinctUntilChanged()
-                    //“Solo me avisas cuando el intent realmente cambie.
-                    //Si sigue siendo el mismo, ignóralo.”
-                    .collect { intent ->
-                        //Log.d(tag = "MainActivity", msg = "Nuevo intent recibido: ${intent?.action}")
-                        navigationViewModel.handleDeepLink(intent)
+            if (showSplash) {
+                SplashScreen {
+                    showSplash = false
+                }
+            } else {
+                LaunchedEffect(Unit) {
+                    navigationViewModel.handleDeepLink(currentIntent)
+                }
+                //lo de arriba se ejecuta una sola vez con ayuda de LaunchedEffect
+                //el deeplink dice:
+                //Pídele al ViewModel de navegación que revise el intent con el que se abrió la app
+                //y decida a qué pantalla debe ir
+
+                LaunchedEffect(key1 = Unit) {
+                    snapshotFlow { currentIntent }
+                        //Crea un “flujo” (Flow) que observa la variable currentIntent.
+                        .distinctUntilChanged()
+                        //“Solo me avisas cuando el intent realmente cambie.
+                        //Si sigue siendo el mismo, ignóralo.”
+                        .collect { intent ->
+                            //Log.d(tag = "MainActivity", msg = "Nuevo intent recibido: ${intent?.action}")
+                            navigationViewModel.handleDeepLink(intent)
+                        }
+                    //si el intent cambio se lo colecciona en collect y nos movemos a otra pantalla si fuera necesario
+                }
+
+                Box(
+                    Modifier
+                        .fillMaxSize()
+                ) {
+                    MainApp(navigationViewModel)
+                    Column {
+                        MaintenanceBanner()
+
+                        Spacer(Modifier.height(8.dp))
                     }
-                //si el intent cambio se lo colecciona en collect y nos movemos a otra pantalla si fuera necesario
-            }
-
-            Box(
-                Modifier
-                    .fillMaxSize()
-            ) {
-                MainApp(navigationViewModel)
-                Column {
-                    MaintenanceBanner()
-
-                    Spacer(Modifier.height(8.dp))
                 }
             }
         }

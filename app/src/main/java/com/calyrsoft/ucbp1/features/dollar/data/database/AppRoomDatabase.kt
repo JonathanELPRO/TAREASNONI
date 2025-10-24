@@ -8,7 +8,7 @@ import com.calyrsoft.ucbp1.features.dollar.data.database.dao.IDollarDao
 import com.calyrsoft.ucbp1.features.dollar.data.database.entity.DollarEntity
 
 //la clase de abajo es abstracta porque tiene metodos abstractos pero tranquilamente podria no tenerlos
-@Database(entities = [DollarEntity::class], version = 6)
+@Database(entities = [DollarEntity::class], version = 10)
 abstract class AppRoomDatabase : RoomDatabase() {
     abstract fun dollarDao(): IDollarDao
     //Es una función abstracta es decir tu no te encargadas de su implementacion

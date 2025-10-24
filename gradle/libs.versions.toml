@@ -20,14 +20,14 @@ retrofit = "3.0.0"
 googleGmsGoogleServices = "4.4.3"
 firebaseDatabaseKtx = "20.3.0"
 firebaseDatabase = "20.3.0"
-ksp = "2.0.20-1.0.24"
-room = "2.8.0"
+ksp = "2.0.21-1.0.25"
 firebaseMessaging = "25.0.1"
 datastore = "1.0.0"
 firebaseConfig = "23.0.1"
 foundation = "1.9.3"
-kotlinx-serialization = "1.7.3"
 roomTesting = "2.8.3"
+kotlinx-serialization = "1.8.0"
+room = "2.8.3"
 
 
 
@@ -71,6 +71,9 @@ datastore = { module = "androidx.datastore:datastore-preferences", version.ref =
 firebase-config = { group = "com.google.firebase", name = "firebase-config", version.ref = "firebaseConfig" }
 androidx-foundation = { group = "androidx.compose.foundation", name = "foundation", version.ref = "foundation" }
 kotlinx-serialization-json = { module = "org.jetbrains.kotlinx:kotlinx-serialization-json", version.ref = "kotlinx-serialization" }
+kotlinx-serialization-core = { module = "org.jetbrains.kotlinx:kotlinx-serialization-core", version.ref = "kotlinx-serialization" }
+
+
 androidx-room-testing = { group = "androidx.room", name = "room-testing", version.ref = "roomTesting" }
 
 

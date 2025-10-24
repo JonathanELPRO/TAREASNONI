@@ -11,6 +11,8 @@ class RoomSchemaArgProvider(
 ) : CommandLineArgumentProvider {
     override fun asArguments(): Iterable<String> {
         return listOf("room.schemaLocation=${schemaDir.path}")
+        //lo de arriba retorna un una lista de argumentos osea una lista de strings
+        //un argumento para room tiene el siguiente formato room.schemaLocation=${schemaDir.path}
     }
 }
 
@@ -28,6 +30,10 @@ plugins {
 
 ksp {
     arg(RoomSchemaArgProvider(File(projectDir, "schemas")))
+    //ksp necesita recibir un procesador de argumentos el cual se lo pasa con arg
+    //este procesador de argumentos retorna una lista de argumentos
+    //donde solo nos importa el primero, este argumento lo agarra KSP y porteriormente se lo pasa a room
+    //de esta forma room sabra donde guardar los esquemas
 }
 
 ktlint {
@@ -155,6 +161,11 @@ dependencies {
     implementation("io.coil-kt:coil-compose:2.6.0")
     implementation("androidx.compose.material:material-icons-extended")
     implementation(libs.kotlinx.serialization.json)
+    implementation(libs.kotlinx.serialization.core)
+
+
+
+
 }
 
 detekt {
@@ -165,3 +176,20 @@ detekt {
 tasks.withType<Detekt>().configureEach {
     jvmTarget = "11"
 }
+
+
+configurations.matching { it.name.startsWith("ksp") }.all {
+    resolutionStrategy {
+        force(
+            // Update these versions
+            "org.jetbrains.kotlinx:kotlinx-serialization-core:1.8.0",
+            "org.jetbrains.kotlinx:kotlinx-serialization-json:1.8.0"
+        )
+    }
+}
+
+//ksp tiene por detras su propio gradle y no necesariamente usara la version serialization que room necesita
+//en este caso estamos forzando a una version serialization que room si usa la 1.8.0, porque ksp trabaja con room
+//ya que ksp trabaja con las anotaciones como @Entity de room
+
+

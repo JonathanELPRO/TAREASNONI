@@ -1,17 +1,33 @@
 import io.gitlab.arturbosch.detekt.Detekt
+import org.gradle.api.tasks.InputDirectory
+import org.gradle.api.tasks.PathSensitive
+import org.gradle.api.tasks.PathSensitivity
+import org.gradle.process.CommandLineArgumentProvider
+
+class RoomSchemaArgProvider(
+    @get:InputDirectory
+    @get:PathSensitive(PathSensitivity.RELATIVE)
+    val schemaDir: File
+) : CommandLineArgumentProvider {
+    override fun asArguments(): Iterable<String> {
+        return listOf("room.schemaLocation=${schemaDir.path}")
+    }
+}
 
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
     alias(libs.plugins.kotlin.compose)
     id("io.sentry.android.gradle") version "5.9.0"
-//    id("org.jlleitschuh.gradle.ktlint") version "11.6.1"
     alias(libs.plugins.ktlint)
     alias(libs.plugins.detekt)
     alias(libs.plugins.google.gms.google.services)
     alias(libs.plugins.ksp)
     alias(libs.plugins.kotlinSerialization)
+}
 
+ksp {
+    arg(RoomSchemaArgProvider(File(projectDir, "schemas")))
 }
 
 ktlint {
@@ -47,6 +63,15 @@ android {
         versionName = "1.0"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+
+        // ✅ Si estuvieras usando KAPT/javac en lugar de KSP, se haría así:
+        // javaCompileOptions {
+        //     annotationProcessorOptions {
+        //         compilerArgumentProviders(
+        //             RoomSchemaArgProvider(File(projectDir, "schemas"))
+        //         )
+        //     }
+        // }
     }
 
     buildTypes {
@@ -54,33 +79,31 @@ android {
             isMinifyEnabled = false
             proguardFiles(
                 getDefaultProguardFile("proguard-android-optimize.txt"),
-                "proguard-rules.pro",
+                "proguard-rules.pro"
             )
         }
     }
+
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_11
         targetCompatibility = JavaVersion.VERSION_11
     }
+
     kotlinOptions {
         jvmTarget = "11"
     }
+
     buildFeatures {
         compose = true
     }
 
-
     sourceSets {
-        // Adds exported schema location as test app assets.
+        // ✅ Esto permite incluir los esquemas en los tests instrumentados
         getByName("androidTest").assets.srcDir("$projectDir/schemas")
     }
-
-
-
 }
 
 dependencies {
-
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.lifecycle.runtime.ktx)
     implementation(libs.androidx.activity.compose)
@@ -95,17 +118,22 @@ dependencies {
     implementation(libs.firebase.config)
     implementation(libs.androidx.foundation)
     implementation(libs.androidx.room.testing)
+
     testImplementation(libs.junit)
     testImplementation("io.mockk:mockk:1.13.8")
     testImplementation("org.jetbrains.kotlinx:kotlinx-coroutines-test:1.7.3")
+
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
     androidTestImplementation(platform(libs.androidx.compose.bom))
     androidTestImplementation(libs.androidx.ui.test.junit4)
+
     debugImplementation(libs.androidx.ui.tooling)
     debugImplementation(libs.androidx.ui.test.manifest)
+
     implementation("com.squareup.retrofit2:retrofit:3.0.0")
     implementation("androidx.compose.ui:ui-text-google-fonts:1.6.8")
+
     implementation(libs.koin.android)
     implementation(libs.koin.androidx.compose)
     implementation(libs.koin.androidx.navigation)
@@ -114,20 +142,19 @@ dependencies {
     implementation(libs.navigation.compose)
     implementation(libs.retrofit)
     implementation(libs.converter.gson)
-
     implementation(libs.bundles.local)
-    annotationProcessor(libs.room.compiler)
-    ksp(libs.room.compiler)
-    testImplementation(libs.room.testing)
+
+    // Room (2.8.3)
+    implementation("androidx.room:room-runtime:2.8.3")
+    ksp("androidx.room:room-compiler:2.8.3")
+    implementation("androidx.room:room-ktx:2.8.3")
+    testImplementation("androidx.room:room-testing:2.8.3")
+
     testImplementation(kotlin("test"))
     implementation(libs.datastore)
     implementation("io.coil-kt:coil-compose:2.6.0")
     implementation("androidx.compose.material:material-icons-extended")
     implementation(libs.kotlinx.serialization.json)
-    testImplementation("androidx.room:room-testing:2.8.3")
-
-
-
 }
 
 detekt {
@@ -138,5 +165,3 @@ detekt {
 tasks.withType<Detekt>().configureEach {
     jvmTarget = "11"
 }
-
-

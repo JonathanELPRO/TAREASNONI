@@ -68,6 +68,15 @@ android {
     buildFeatures {
         compose = true
     }
+
+
+    sourceSets {
+        // Adds exported schema location as test app assets.
+        getByName("androidTest").assets.srcDir("$projectDir/schemas")
+    }
+
+
+
 }
 
 dependencies {
@@ -85,6 +94,7 @@ dependencies {
     implementation(libs.firebase.messaging)
     implementation(libs.firebase.config)
     implementation(libs.androidx.foundation)
+    implementation(libs.androidx.room.testing)
     testImplementation(libs.junit)
     testImplementation("io.mockk:mockk:1.13.8")
     testImplementation("org.jetbrains.kotlinx:kotlinx-coroutines-test:1.7.3")
@@ -114,6 +124,9 @@ dependencies {
     implementation("io.coil-kt:coil-compose:2.6.0")
     implementation("androidx.compose.material:material-icons-extended")
     implementation(libs.kotlinx.serialization.json)
+    testImplementation("androidx.room:room-testing:2.8.3")
+
+
 
 }
 
@@ -125,3 +138,5 @@ detekt {
 tasks.withType<Detekt>().configureEach {
     jvmTarget = "11"
 }
+
+

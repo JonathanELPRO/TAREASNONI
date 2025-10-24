@@ -19,7 +19,7 @@ val MIGRATION_6_7 = object : Migration(startVersion = 6, endVersion = 7) {
     }
 }
 
-@Database(entities = [MovieEntity::class], version = 7)
+@Database(entities = [MovieEntity::class], version = 7, exportSchema = true)
 abstract class AppRoomDatabaseMovies : RoomDatabase() {
     abstract fun movieDao(): IMovieDao
 
@@ -39,6 +39,7 @@ abstract class AppRoomDatabaseMovies : RoomDatabase() {
                     AppRoomDatabaseMovies::class.java,
                     "movie_db"
                 )
+                    //.fallbackToDestructiveMigration()
                     .addMigrations(MIGRATION_6_7)
                     .build()
                     .also { Instance = it }

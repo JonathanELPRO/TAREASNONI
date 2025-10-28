@@ -19,6 +19,8 @@ sealed class Screen(val route: String) {
         object MovieDetailScreen: Screens("moviedetail")
     }
 
+    object Atulado: Screen("atulado")
+
 
 
 

@@ -29,6 +29,7 @@ import com.calyrsoft.ucbp1.features.profile.presentation.SigninPage
 import com.calyrsoft.ucbp1.features.reservation.presentation.HistoryScreen
 import com.calyrsoft.ucbp1.features.reservation.presentation.PaymentScreen
 import com.calyrsoft.ucbp1.features.reservation.presentation.ReservationScreen
+import com.calyrsoft.ucbp1.features.webview.presentation.AtuladoScreen
 import org.koin.androidx.compose.koinViewModel
 import java.net.URLEncoder
 import kotlinx.serialization.decodeFromString
@@ -336,6 +337,18 @@ fun AppNavigation(navigationViewModel: NavigationViewModel, modifier: Modifier, 
         ) { backStack ->
             val reservationId = backStack.arguments!!.getLong("reservationId")
             PaymentScreen(vm = koinViewModel(), reservationId = reservationId)
+        }
+
+
+        composable(
+            Screen.Atulado.route
+        ) {
+            AtuladoScreen(
+                "https://www.bisa.com/atulado",
+                postData = null,
+                modifier = modifier,
+                shouldStopBrowsing = { true }
+            )
         }
 
 

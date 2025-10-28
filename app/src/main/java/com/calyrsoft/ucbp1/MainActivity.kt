@@ -148,7 +148,8 @@ fun MainApp( navigationViewModel: NavigationViewModel) {
         // --- 📅 RESERVATION ---
         NavigationDrawer.ReservationCreate,
         NavigationDrawer.ReservationHistory,
-        NavigationDrawer.ReservationPayment
+        NavigationDrawer.ReservationPayment,
+        NavigationDrawer.Atulado
     )
 
     val drawerState =

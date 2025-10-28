@@ -90,4 +90,11 @@ sealed class NavigationDrawer(
         Icons.Outlined.FavoriteBorder,
         Screen.ReservationPayment.route
     )
+
+    data object Atulado : NavigationDrawer(
+        "Atulado",
+        Icons.Filled.Favorite,
+        Icons.Outlined.FavoriteBorder,
+        Screen.Atulado.route
+    )
 }

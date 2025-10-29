@@ -198,14 +198,23 @@ fun AtuladoScreen(url: String,
                                     override fun doUpdateVisitedHistory(view: WebView?, url: String?, isReload: Boolean) {
                                         super.doUpdateVisitedHistory(view, url, isReload)
                                         canGoBack = view?.canGoBack() == true
+                                        //doUpdateVisitedHistory actualiza el historia de navegaciones
+                                        //cada que lo actualices significa que nos movimos a otra pagina por eso canGoBack esta en true
                                     }
 
                                 }
 
                                 if (postData != null) {
                                     postUrl(url, postData.toByteArray(StandardCharsets.UTF_8))
+                                    //postUrl(...) → es un método nativo de la clase WebView.
+                                    //url → es el destino (por ejemplo, "https://www.bisa.com/atulado/login").
+                                    //
+                                    //postData.toByteArray(StandardCharsets.UTF_8) →
+                                // convierte el texto (String) de tus datos en un arreglo
+                                // de bytes usando codificación UTF-8 (lo que espera el servidor).
                                 } else {
                                     loadUrl(url)
+                                    //Hace una solicitud HTTP GET normal.
                                 }
 
                                 webView.value = this

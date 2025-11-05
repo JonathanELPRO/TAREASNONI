@@ -28,6 +28,8 @@ foundation = "1.9.3"
 roomTesting = "2.8.3"
 kotlinx-serialization = "1.8.0"
 room = "2.8.3"
+workRuntimeKtx = "2.11.0"
+protobuf = "0.9.4"
 
 
 
@@ -72,9 +74,8 @@ firebase-config = { group = "com.google.firebase", name = "firebase-config", ver
 androidx-foundation = { group = "androidx.compose.foundation", name = "foundation", version.ref = "foundation" }
 kotlinx-serialization-json = { module = "org.jetbrains.kotlinx:kotlinx-serialization-json", version.ref = "kotlinx-serialization" }
 kotlinx-serialization-core = { module = "org.jetbrains.kotlinx:kotlinx-serialization-core", version.ref = "kotlinx-serialization" }
-
-
 androidx-room-testing = { group = "androidx.room", name = "room-testing", version.ref = "roomTesting" }
+androidx-work-runtime-ktx = { module = "androidx.work:work-runtime-ktx", version.ref = "workRuntimeKtx" }
 
 
 
@@ -90,3 +91,5 @@ detekt = { id = "io.gitlab.arturbosch.detekt", version.ref = "detekt"}
 google-gms-google-services = { id = "com.google.gms.google-services", version.ref = "googleGmsGoogleServices" }
 ksp = { id = "com.google.devtools.ksp", version.ref="ksp"}
 kotlinSerialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlin"}
+google-protobuf = { id = "com.google.protobuf", version.ref = "protobuf"}
+

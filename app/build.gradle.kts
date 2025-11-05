@@ -26,6 +26,8 @@ plugins {
     alias(libs.plugins.google.gms.google.services)
     alias(libs.plugins.ksp)
     alias(libs.plugins.kotlinSerialization)
+    alias(libs.plugins.google.protobuf)
+
 }
 
 ksp {
@@ -162,6 +164,8 @@ dependencies {
     implementation("androidx.compose.material:material-icons-extended")
     implementation(libs.kotlinx.serialization.json)
     implementation(libs.kotlinx.serialization.core)
+    implementation(libs.androidx.work.runtime.ktx)
+
 
 
 

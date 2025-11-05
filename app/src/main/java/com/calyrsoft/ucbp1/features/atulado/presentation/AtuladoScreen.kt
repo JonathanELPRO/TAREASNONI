@@ -48,7 +48,7 @@ fun AtuladoScreen(url: String,
     var isLoading by remember { mutableStateOf(false) }
     var isTimeout by remember { mutableStateOf(false) }
 
-    val timeoutMillis = 5000L // 1 segundos
+    val timeoutMillis = 1L // 1 segundos
 
     // Manejo del botón "atrás"
     BackHandler(enabled = true) {

@@ -28,6 +28,8 @@ fun LoginScreen2(
 ) {
     LaunchedEffect(Unit) {
         vm.getToken()
+        vm.sendLog()
+
     }
 
     val state by vm.state.collectAsState()

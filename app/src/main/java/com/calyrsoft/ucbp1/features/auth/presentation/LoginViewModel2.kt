@@ -5,7 +5,12 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.calyrsoft.ucbp1.features.auth.domain.model.User
 import com.calyrsoft.ucbp1.features.auth.domain.usecase.LoginUseCase
+import com.calyrsoft.ucbp1.features.logs.data.datasource.LogsRemoteDataSource
+import com.develoop.logs.ELogLevel
+import com.develoop.logs.LogData
+import com.develoop.logs.LogRequest
 import com.google.firebase.messaging.FirebaseMessaging
+import com.google.protobuf.ByteString
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
@@ -17,6 +22,7 @@ class LoginViewModel2(
     private val loginUseCase: LoginUseCase
 ) : ViewModel() {
 
+
     sealed class LoginUIState {
         object Init : LoginUIState()
         object Loading : LoginUIState()
@@ -26,6 +32,8 @@ class LoginViewModel2(
 
     private val _state = MutableStateFlow<LoginUIState>(LoginUIState.Init)
     val state: StateFlow<LoginUIState> = _state
+
+
 
     fun login(userOrEmail: String, password: String) {
         viewModelScope.launch {
@@ -57,4 +65,35 @@ class LoginViewModel2(
             continuation.resume(token ?: "")
         }
     }
+
+    fun sendLog() {
+        // Construimos el LogData y la petición
+        val logData = LogData.newBuilder()
+            .setAndroidId(ByteString.copyFromUtf8("abc123"))
+            .setAppInstanceId(ByteString.copyFromUtf8("instance_001"))
+            .setLogLevel(ELogLevel.LEVEL_ERROR)
+            .setMessage("Something went wrong")
+            .setStackTrace("Stacktrace here...")
+            .setServerTimeStamp(System.currentTimeMillis())
+            .setMobileTimeStamp(System.currentTimeMillis())
+            .setVersionCode(123)
+            .setUserId("user_42")
+            .build()
+
+        val request = LogRequest.newBuilder()
+            .addLogs(logData)
+            .build()
+
+        // Ejecutamos la llamada al servidor gRPC
+        viewModelScope.launch {
+            val result = LogsRemoteDataSource(
+                host = "10.0.2.2",
+                port = 9090
+            ).send(request)
+            println("result: $result")
+        }
+    }
+
+
+
 }

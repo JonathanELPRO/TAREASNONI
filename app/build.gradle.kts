@@ -3,6 +3,9 @@ import org.gradle.api.tasks.InputDirectory
 import org.gradle.api.tasks.PathSensitive
 import org.gradle.api.tasks.PathSensitivity
 import org.gradle.process.CommandLineArgumentProvider
+import com.google.protobuf.gradle.id
+
+
 
 class RoomSchemaArgProvider(
     @get:InputDirectory
@@ -27,6 +30,7 @@ plugins {
     alias(libs.plugins.ksp)
     alias(libs.plugins.kotlinSerialization)
     alias(libs.plugins.google.protobuf)
+
 
 }
 
@@ -165,12 +169,47 @@ dependencies {
     implementation(libs.kotlinx.serialization.json)
     implementation(libs.kotlinx.serialization.core)
     implementation(libs.androidx.work.runtime.ktx)
+    //proto
+    implementation(libs.grpc.protobuf.lite)
+    implementation(libs.protobuf.kotlin.lite)
+    implementation(libs.grpc.kotlin.stub)
+    runtimeOnly(libs.grpc.okhttp)
 
 
 
 
 
 }
+
+protobuf {
+    protoc {
+        artifact = "com.google.protobuf:protoc:${libs.versions.protobuf.get()}"
+    }
+    plugins {
+        id("java") {
+            artifact = libs.protoc.gen.grpc.java.get().toString()
+        }
+        id("grpc") {
+            artifact = "io.grpc:protoc-gen-grpc-java:${libs.versions.grpc.get()}"
+        }
+        id("grpckt") {
+            artifact = "io.grpc:protoc-gen-grpc-kotlin:${libs.versions.grpcKotlin.get()}:jdk8@jar"
+        }
+    }
+    generateProtoTasks {
+        all().forEach {
+            it.plugins {
+                create("java") { option("lite") }
+                create("grpc") { option("lite") }
+                create("grpckt") { option("lite") }
+            }
+            it.builtins {
+                create("kotlin") { option("lite") }
+            }
+        }
+    }
+}
+
 
 detekt {
     parallel = true

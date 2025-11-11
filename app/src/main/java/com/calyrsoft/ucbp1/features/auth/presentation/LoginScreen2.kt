@@ -10,6 +10,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.PasswordVisualTransformation
@@ -17,6 +18,11 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.calyrsoft.ucbp1.R
 import com.calyrsoft.ucbp1.features.auth.domain.model.Role
+import com.calyrsoft.ucbp1.ui.icons.MyIconPack
+
+import com.calyrsoft.ucbp1.ui.icons.myiconpack.Imagen
+
+
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -31,6 +37,8 @@ fun LoginScreen2(
         vm.sendLog()
 
     }
+
+
 
     val state by vm.state.collectAsState()
     var userOrEmail by remember { mutableStateOf("") }
@@ -118,5 +126,14 @@ fun LoginScreen2(
                 Text("Crear cuenta", color = Color.White, fontWeight = FontWeight.SemiBold)
             }
         }
-    }
+
+
+
+        Icon(
+            imageVector = MyIconPack.Imagen,
+            contentDescription = "Foto adecuada",
+            tint = Color.Unspecified
+        )
+
+       }
 }

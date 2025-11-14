@@ -1,3 +1,4 @@
+import com.google.firebase.appdistribution.gradle.firebaseAppDistribution
 import io.gitlab.arturbosch.detekt.Detekt
 import org.gradle.api.tasks.InputDirectory
 import org.gradle.api.tasks.PathSensitive
@@ -30,6 +31,7 @@ plugins {
     alias(libs.plugins.ksp)
     alias(libs.plugins.kotlinSerialization)
     alias(libs.plugins.google.protobuf)
+    alias(libs.plugins.google.firebase.appdistribution)
 
 
 }
@@ -93,8 +95,14 @@ android {
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro"
             )
+            firebaseAppDistribution {
+                releaseNotes = "Nueva versión para testers"
+                testers = "moruno.teran.jonathan@gmail.com, jonathan.moruno@ucb.edu.bo"
+            }
         }
     }
+
+
 
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_11

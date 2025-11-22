@@ -1,13 +1,14 @@
 {
   "project_info": {
-    "project_number": "286748593836",
-    "project_id": "tareasnoni",
-    "storage_bucket": "tareasnoni.firebasestorage.app"
+    "project_number": "866073591661",
+    "firebase_url": "https://examen2-7b834-default-rtdb.firebaseio.com",
+    "project_id": "examen2-7b834",
+    "storage_bucket": "examen2-7b834.firebasestorage.app"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:286748593836:android:7c7e7bdaac91f86111d909",
+        "mobilesdk_app_id": "1:866073591661:android:d0d0d895592489756c2464",
         "android_client_info": {
           "package_name": "com.calyrsoft.ucbp1"
         }
@@ -15,7 +16,7 @@
       "oauth_client": [],
       "api_key": [
         {
-          "current_key": "AIzaSyB0MCruzqpd9evkF5VgHhwlD0BM2Qe-sjU"
+          "current_key": "AIzaSyAU3Pi_T93UKQBbUZ8hfXqlJN6gAS7qJrI"
         }
       ],
       "services": {

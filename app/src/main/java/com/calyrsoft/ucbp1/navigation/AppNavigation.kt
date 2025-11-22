@@ -351,6 +351,40 @@ fun AppNavigation(navigationViewModel: NavigationViewModel, modifier: Modifier, 
             )
         }
 
+//        composable(
+//            Screen.Atulado.route
+//        ) {
+//            AtuladoScreen(
+//                // 1. Apunta a la URL que PROCESA el login
+//                url = "https://the-internet.herokuapp.com/authenticate",
+//
+//                postData = "username=tomsmith&password=SuperSecretPassword!",
+//
+//                modifier = modifier,
+//
+//                // 2. ¡CRÍTICO! Permite la navegación para ver la página de bienvenida
+//                shouldStopBrowsing = { false }
+//            )
+//        }
+
+        //eso de arriba es un ejemplo de como enviar postData para que se pueda hacer login, en este caso
+        //estamos usando una url de prueba que tiene un login de prueba, se un username y un password que la misma pagina
+        //como es de testeo me da, la cosa es como armamos el postData?
+        //entramos aqui: https://the-internet.herokuapp.com/login
+        //le damos a inspeccionar al username y al password sale esto:
+        //<input type="text" name="username" id="username">
+        //<input type="password" name="password" id="password">
+        //lo importante es agarrar el input y su name, con el name de ambos creamos esto:
+        //"username=tomsmith&password=SuperSecretPassword!"
+        //luego de eso debemps darnos cuenta que https://the-internet.herokuapp.com/login
+        //es una solicitud get para ver el formulario
+        //en este html nos podemos dar cuenta que exitse <form id="login" action="/authenticate" method="post">
+        //ese form nos da la url final
+        //https://the-internet.herokuapp.com/authenticate   que es el endpoint final a quien se envia los datos del formulario
+        //la manera de enviarle datos ya lo definimos con ayuda el formulario de la pagina del login
+        //ademas debemos habilitar la redireccion pued luego de pasar por el endpoint authenticate nos vamos a secure
+
+
 
 
     }

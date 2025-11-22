@@ -48,7 +48,7 @@ fun AtuladoScreen(url: String,
     var isLoading by remember { mutableStateOf(false) }
     var isTimeout by remember { mutableStateOf(false) }
 
-    val timeoutMillis = 1L // 1 segundos
+    val timeoutMillis = 30000L // 1 segundos, 30 segundos es = 30000L
 
     // Manejo del botón "atrás"
     BackHandler(enabled = true) {
@@ -193,6 +193,7 @@ fun AtuladoScreen(url: String,
                                         //true → “detén la carga, yo haré algo (por ejemplo, abrir Chrome o cerrar la pantalla)”
                                         //
                                         //false → “sigue la carga dentro del mismo WebView”
+                                        //deberia invalidar la carga de la url esa es la traduccion de override fun shouldOverrideUrlLoading
                                     }
 
                                     override fun doUpdateVisitedHistory(view: WebView?, url: String?, isReload: Boolean) {

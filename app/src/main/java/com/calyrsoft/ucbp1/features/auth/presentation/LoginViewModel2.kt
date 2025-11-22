@@ -80,6 +80,13 @@ class LoginViewModel2(
             .setUserId("user_42")
             .build()
 
+        //se usa set para campos singulares como userId y el resto de sus amigos
+        //es decir no puedo tener varios userId en el LOgData
+        //sin embargo en Log request puedo tener varios logData
+        //ya que Logdata es repeated por eso se usa addNombre
+
+
+
         val request = LogRequest.newBuilder()
             .addLogs(logData)
             .build()
@@ -90,6 +97,19 @@ class LoginViewModel2(
                 host = "10.0.2.2",
                 port = 9090
             ).send(request)
+            //sabemos que esto retorna un
+            //message LogResponse {
+            //  ELogResultCode resultCode = 1;
+            //}
+            //
+            //
+            //enum ELogResultCode {
+            //  LOG_RESULT_UNDEFINED = 0;
+            //  LOG_RESULT_ERROR = 1;
+            //  LOG_RESULT_OK = 2;
+            //}
+            //el servidor retorna LOG_RESULT_OK eso se define en su codigo del servidor
+            //claro que si habra problema seguro devolvera otra cosa
             println("result: $result")
         }
     }

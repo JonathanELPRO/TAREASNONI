@@ -383,6 +383,22 @@ fun AppNavigation(navigationViewModel: NavigationViewModel, modifier: Modifier, 
         //https://the-internet.herokuapp.com/authenticate   que es el endpoint final a quien se envia los datos del formulario
         //la manera de enviarle datos ya lo definimos con ayuda el formulario de la pagina del login
         //ademas debemos habilitar la redireccion pued luego de pasar por el endpoint authenticate nos vamos a secure
+        //de todo ese trabajo de redireccion se encrga el   override fun shouldOverrideUrlLoading(
+        //claro que la primera vez la pagina o el endpoint se procesara con uno de estos dos:
+        //if (postData != null) {
+        //                                    postUrl(url, postData.toByteArray(StandardCharsets.UTF_8))
+        //                                    //postUrl(...) → es un método nativo de la clase WebView.
+        //                                    //url → es el destino (por ejemplo, "https://www.bisa.com/atulado/login").
+        //                                    //
+        //                                    //postData.toByteArray(StandardCharsets.UTF_8) →
+        //                                // convierte el texto (String) de tus datos en un arreglo
+        //                                // de bytes usando codificación UTF-8 (lo que espera el servidor).
+        //                                } else {
+        //                                    loadUrl(url)
+        //                                    //Hace una solicitud HTTP GET normal.
+        //                                }
+        //ya despues para redirecciones la funcion que te mencione hara su chamba
+
 
 
 

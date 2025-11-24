@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+ Loco xml export: Android strings
+ Project: examen
+ Locale: es-BO, Spanish (Bolivia)
+ Exported by: Sebastian Daniel Beller Sanzetenea
+ Exported at: Sun, 23 Nov 2025 22:59:59 -0400
+-->
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+    <string name="app_name">ucbp1</string>
+    <string name="login_title">Iniciar Sesion</string>
+    <string name="signin_button">Registrarse</string>
+    <string name="signin_title">Registrate</string>
+    <!-- Errores -->
+    <string name="error_network">Error en la red</string>
+    <string name="error_server">Error del Servidor</string>
+    <string name="error_not_found">Error recurso no encontrado</string>
+    <string name="error_empty_response">Error respuesta vacia</string>
+    <string name="error_unknown">Error desconocido</string>
+</resources>

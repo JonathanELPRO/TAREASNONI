@@ -286,7 +286,7 @@ class MainActivity : ComponentActivity() {
                 //Pídele al ViewModel de navegación que revise el intent con el que se abrió la app
                 //y decida a qué pantalla debe ir
 
-                LaunchedEffect(key1 = Unit) {
+                LaunchedEffect(Unit) {
                     snapshotFlow { currentIntent }
                         //Crea un “flujo” (Flow) que observa la variable currentIntent.
                         .distinctUntilChanged()
@@ -298,6 +298,7 @@ class MainActivity : ComponentActivity() {
                         }
                     //si el intent cambio se lo colecciona en collect y nos movemos a otra pantalla si fuera necesario
                 }
+
 
                 Box(
                     Modifier

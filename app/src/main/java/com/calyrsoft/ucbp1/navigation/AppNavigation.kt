@@ -17,6 +17,7 @@ import com.calyrsoft.ucbp1.features.auth.presentation.RegisterScreen
 import com.calyrsoft.ucbp1.features.dollar.presentation.DollarScreen
 import com.calyrsoft.ucbp1.features.profile.presentation.ForgotPasswordScreen
 import com.calyrsoft.ucbp1.features.github.presentation.GithubScreen
+import com.calyrsoft.ucbp1.features.hora.presentation.TimeScreen
 import com.calyrsoft.ucbp1.features.lodging.presentation.LodgingDetailsScreen
 import com.calyrsoft.ucbp1.features.lodging.presentation.LodgingEditorScreen
 import com.calyrsoft.ucbp1.features.lodging.presentation.LodgingListScreen
@@ -73,7 +74,7 @@ fun AppNavigation(navigationViewModel: NavigationViewModel, modifier: Modifier, 
 
     NavHost(
         navController = navController,
-        startDestination = Screen.AuthLogin.route,
+        startDestination = Screen.TimeScreen.route,
         //no impirta que valor pongas arriba no empezaremos ahi por culpa del else de handleDeepLink
         //que se llama en el primer launched effect de main activity
         modifier = modifier
@@ -398,6 +399,12 @@ fun AppNavigation(navigationViewModel: NavigationViewModel, modifier: Modifier, 
         //                                    //Hace una solicitud HTTP GET normal.
         //                                }
         //ya despues para redirecciones la funcion que te mencione hara su chamba
+
+
+
+        composable(Screen.TimeScreen.route) {
+            TimeScreen(viewModel = koinViewModel())
+        }
 
 
 

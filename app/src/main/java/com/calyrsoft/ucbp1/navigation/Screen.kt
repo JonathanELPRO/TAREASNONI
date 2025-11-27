@@ -59,6 +59,8 @@ sealed class Screen(val route: String) {
     /** Registrar pago (anticipo o saldo) */
     object ReservationPayment : Screen("reservation_payment/{reservationId}")
 
+    object TimeScreen : Screen("time") // Nueva pantalla para la hora
+
 
 
 }
